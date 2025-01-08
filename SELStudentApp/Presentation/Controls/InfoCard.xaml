@@ -1,0 +1,23 @@
+﻿<UserControl
+    x:Class="SELStudentApp.Presentation.Controls.InfoCard"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SELStudentApp.Presentation.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="using:SELStudentApp.ViewModels" 
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Frame Padding="15"
+           CornerRadius="5"
+           Background="{ThemeResource TertiaryContainerColor}">
+        <StackPanel Orientation="Horizontal" Spacing="5">
+            <FontIcon FontFamily="{StaticResource MaterialSymbols}"
+                      Glyph="&#xE88E;"
+                      VerticalAlignment="Center"/>
+            <TextBlock Text="{x:Bind Message, Mode=OneWay}" VerticalAlignment="Center"/>
+        </StackPanel>
+    </Frame>
+</UserControl>

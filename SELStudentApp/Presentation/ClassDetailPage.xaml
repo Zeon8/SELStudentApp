@@ -1,0 +1,115 @@
+﻿<Page
+    x:Class="SELStudentApp.Presentation.ClassDetailPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SELStudentApp.Presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:SELStudentApp.Presentation.Controls"
+    xmlns:viewModels="using:SELStudentApp.ViewModels" 
+    xmlns:models="using:SELStudentApp.Core.Models" 
+    xmlns:uen="using:Uno.Extensions.Navigation.UI"
+    xmlns:utu="using:Uno.Toolkit.UI"
+    xmlns:um="using:Uno.Material"
+    xmlns:sys="using:System"
+    xmlns:toolkit="using:Uno.UI.Toolkit"
+    mc:Ignorable="d"
+    Background="{ThemeResource BackgroundBrush}"
+    d:DataContext="{d:DesignInstance viewModels:ClassDetailViewModel}">
+
+    <Page.Resources>
+        <Style x:Name="Card" TargetType="Frame">
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Background" Value="{ThemeResource PrimaryContainerColor}"/>
+            <Setter Property="Padding" Value="15"/>
+        </Style>
+        <Style x:Name="CardTitle" TargetType="TextBlock" BasedOn="{ThemeResource TitleLarge}">
+            <Setter Property="Foreground" Value="{ThemeResource OnPrimaryContainerColor}"/>
+        </Style>
+        <Style x:Name="Title" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{ThemeResource OnSecondaryContainerColor}"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+    </Page.Resources>
+    
+    <Grid utu:SafeArea.Insets="VisibleBounds">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <utu:NavigationBar Content="Інформація про пару"/>
+        <ScrollView Grid.Row="1" Margin="20,0">
+            <StackPanel Spacing="16">
+                <Frame Style="{StaticResource Card}">
+                    <StackPanel Spacing="16">
+                        <TextBlock Text="{Binding Item.Model.Subject.Name}"
+                                   Foreground="{ThemeResource OnPrimaryContainerColor}"
+                                   Style="{ThemeResource HeadlineLarge}"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Spacing="4">
+                                <TextBlock>
+                                    <Run Text="{Binding Item.StartTime}"/> - <Run Text="{Binding Item.EndTime}"/>
+                                </TextBlock>
+                                <TextBlock Style="{StaticResource Title}">
+                                    Пара <Run Text="{Binding Item.Model.ParaNumber}"/>
+                                </TextBlock>
+                            </StackPanel>
+                            <Frame Grid.Column="2"
+                                   Background="{Binding Item.Model.ClassType, Converter={StaticResource ClassTypeToColor}}"
+                                   CornerRadius="8"
+                                   Content="{Binding Item.ClassTypeName}"
+                                   Foreground="Black"
+                                   HorizontalContentAlignment="Center"
+                                   VerticalContentAlignment="Top"
+                                   Padding="10"/>
+                        </Grid>
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="Викладач"/>
+                            <TextBlock Text="{Binding Item.Teacher, TargetNullValue='Викладач не вказаний'}"
+                                       Style="{StaticResource Title}"/>
+                        </StackPanel>
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="Аудиторія"/>
+                            <StackPanel Orientation="Horizontal"
+                                        Spacing="4">
+                                <FontIcon FontFamily="{StaticResource MaterialSymbols}" Glyph="&#xE0C8;"
+                                          VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding Item.Classroom, TargetNullValue='Інформація про розташування відсутня'}"
+                                           VerticalAlignment="Center"
+                                           Style="{StaticResource Title}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </Frame>
+                <Frame Style="{StaticResource Card}">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="Інформація про Zoom конференцію"
+                                   Style="{StaticResource CardTitle}"/>
+                        <StackPanel Spacing="12" Visibility="{Binding Item.Model.IsOnline}">
+                            <Button HorizontalAlignment="Stretch"
+                                    Background="{ThemeResource TertiaryColor}">
+                                <HyperlinkButton NavigateUri="{Binding Item.Model.ZoomMeeting.Link}">
+                                    <TextBlock Text="Приєднатись до конференції"
+                                               Foreground="{ThemeResource OnTertiaryColor}"/>
+                                </HyperlinkButton>
+                            </Button>
+                            <controls:CopyRow Title="ID конференції:"
+                                              CopyText="{Binding Item.Model.ZoomMeeting.MeetingId}"
+                                              CopyCommand="{Binding CopyToClipboardCommand}"/>
+                            <controls:CopyRow Title="Пароль:"
+                                              CopyText="{Binding Item.Model.ZoomMeeting.Password}"
+                                              CopyCommand="{Binding CopyToClipboardCommand}"/>
+                        </StackPanel>
+                        <TextBlock Text="Zoom конференція не створена"
+                                   Visibility="{Binding Item.Model.IsOnline, Converter={StaticResource InverseBool}}"/>
+                    </StackPanel>
+                </Frame>
+            </StackPanel>
+        </ScrollView>
+    </Grid>
+</Page>

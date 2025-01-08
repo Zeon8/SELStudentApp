@@ -1,0 +1,56 @@
+﻿<Page
+    x:Class="SELStudentApp.Presentation.ProfilePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SELStudentApp.Presentation"
+    xmlns:controls="using:SELStudentApp.Presentation.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="using:SELStudentApp.ViewModels"
+    xmlns:converters="using:SELStudentApp.Converters"
+    xmlns:utu="using:Uno.Toolkit.UI"
+    xmlns:um="using:Uno.Material"
+    mc:Ignorable="d"
+    Background="{ThemeResource BackgroundBrush}"
+    d:DataContext="{d:DesignInstance viewModels:ProfileViewModel}">
+
+    <Grid utu:SafeArea.Insets="VisibleBounds">
+        <utu:NavigationBar Content="Профіль"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Spacing="20"
+                        VerticalAlignment="Center"
+                        Grid.Column="1">
+                <Grid>
+                    <Image Source="{Binding Student.PhotoUrl}"
+                           ImageFailed="Image_ImageFailed_1"
+                           Height="150"/>
+                    <FontIcon x:Name="NoProfilePicture"
+                              FontFamily="{StaticResource MaterialSymbolsLight}"
+                              Glyph="&#xE851;"
+                              Height="150"
+                              FontSize="150"
+                              Visibility="Collapsed"/>
+                </Grid>
+
+                <Frame Background="{ThemeResource PrimaryContainerColor}" Padding="20"
+                       CornerRadius="20">
+                    <StackPanel Spacing="20">
+                        <controls:ProfilePageRow Title="Ім'я" Value="{Binding Student.Name}"/>
+                        <controls:ProfilePageRow Title="Email" Value="{Binding Student.Email}"/>
+                        <controls:ProfilePageRow Title="Telegram" Value="{Binding Student.TelegramUsername}"
+                                                 Visibility="{Binding Student.TelegramUsername, Converter={StaticResource InvisibleWhenNull}}"/>
+                        <controls:ProfilePageRow Title="Статус" Value="{Binding Status}"/>
+                        <controls:ProfilePageRow Title="Останій візит" Value="{Binding Student.LastVisit}"
+                                                 Visibility="{Binding Student.LastVisit, Converter={StaticResource InvisibleWhenNull}}"/>
+                    </StackPanel>
+                </Frame>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

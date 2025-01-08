@@ -1,0 +1,16 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="using:SELStudentApp.Converters">
+    
+    <converters:NullToVisibility x:Name="InvisibleWhenNull" WhenNull="Collapsed" WhenNonNull="Visible"/>
+    <converters:NullToVisibility x:Name="VisibleWhenNull" WhenNull="Visible" WhenNonNull="Collapsed"/>
+    <converters:AnyToVisiblityConverter x:Name="VisibleWhenAny" WhenEmpty="Collapsed" WhenAny="Visible"/>
+    <converters:AnyToVisiblityConverter x:Name="VisibleWhenEmpty" WhenEmpty="Visible" WhenAny="Collapsed"/>
+    <converters:ClassTypeToColorConverter x:Name="ClassTypeToColor" DefaultColor="{ThemeResource SurfaceContainerColor}" />
+    <converters:InverseBoolConverter x:Name="InverseBool"/>
+    <converters:StringNullOrEmptyToVisiblity x:Name="InvisibleWhenStringEmptyOrNull" WhenTrue="Collapsed" WhenFalse="Visible"/>
+    <converters:StringNullOrEmptyToVisiblity x:Name="VisibleWhenStringEmptyOrNull" WhenTrue="Visible" WhenFalse="Collapsed"/>
+
+    <converters:StringFormatConverter x:Name="ScoreFormatter" Formatting="{}{0:F1}"/>
+</ResourceDictionary>

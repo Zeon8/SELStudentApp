@@ -1,0 +1,40 @@
+﻿<Page
+    x:Class="SELStudentApp.Presentation.Schedule.TodaySchedulePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="using:SELStudentApp.Presentation.Schedule"
+    xmlns:controls="using:SELStudentApp.Presentation.Controls"
+    xmlns:viewModels="using:SELStudentApp.ViewModels"
+    xmlns:converters="using:SELStudentApp.Converters"
+    xmlns:models="using:SELStudentApp.Core.Models"
+    xmlns:uen="using:Uno.Extensions.Navigation.UI"
+    xmlns:utu="using:Uno.Toolkit.UI"
+    xmlns:um="using:Uno.Material"
+    xmlns:system="using:System"
+    mc:Ignorable="d"
+    Background="{ThemeResource BackgroundBrush}"
+    d:DataContext="{d:DesignInstance viewModels:ScheduleViewModel}"
+    DataContextChanged="Page_DataContextChanged">
+
+    <Grid utu:SafeArea.Insets="VisibleBounds">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <utu:NavigationBar Content="Розклад на сьогодні" />
+        <ScrollView Grid.Row="1" Margin="10">
+            <StackPanel Spacing="16">
+                <TextBlock Text="{x:Bind system:DateTime.Today.ToString('dd.MM.yyyy')}"
+                           HorizontalAlignment="Center"/>
+                <controls:ScheduleList ScheduleItems="{Binding ScheduleItems}"
+                                       LoadScheduleCommand="{Binding LoadTodayScheduleCommand}">
+                    <controls:ScheduleList.MessageContent>
+                        <controls:InfoCard Message="{Binding Message}"/>
+                    </controls:ScheduleList.MessageContent>
+                </controls:ScheduleList>
+            </StackPanel>
+        </ScrollView>
+    </Grid>
+</Page>

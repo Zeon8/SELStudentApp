@@ -1,0 +1,86 @@
+﻿<UserControl
+    x:Class="SELStudentApp.Presentation.Controls.ScheduleItem"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SELStudentApp.Presentation.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:SELStudentApp.Models"
+    xmlns:viewModel="using:SELStudentApp.ViewModels"
+    xmlns:system="using:System"
+    xmlns:converters="using:SELStudentApp.Converters"
+    xmlns:uen="using:Uno.Extensions.Navigation.UI"
+    xmlns:utu="using:Uno.Toolkit.UI"
+    xmlns:um="using:Uno.Material"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400"
+    d:DataContext="{d:DesignInstance viewModel:ScheduleItemViewModel}">
+
+    <Button Padding="10"
+            CornerRadius="12"
+            Background="{Binding Model.ClassType, Mode=OneWay, Converter={StaticResource ClassTypeToColor}}"
+            HorizontalAlignment="Stretch"
+            HorizontalContentAlignment="Stretch"
+            Style="{ThemeResource TextButtonStyle}"
+            uen:Navigation.Request="ClassDetail"
+            uen:Navigation.Data="{Binding}">
+        <StackPanel Spacing="8">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{Binding Model.Subject.Name}"
+                           Style="{ThemeResource TitleMedium}"
+                           Foreground="Black"/>
+
+                <TextBlock Grid.Column="2" Foreground="Gray">
+                    <Run Text="{Binding StartTime}"/> - <Run Text="{Binding EndTime}"/>
+                </TextBlock>
+            </Grid>
+
+            <TextBlock Text="{Binding Teacher, FallbackValue='Викладач не вказаний'}"
+                       Foreground="Gray" />
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <HyperlinkButton NavigateUri="{Binding Model.ZoomMeeting.Link}"
+                                 Visibility="{Binding Model.IsOnline}">
+                    <StackPanel Orientation="Horizontal" Spacing="4">
+                        <FontIcon FontFamily="{StaticResource MaterialSymbols}"
+                                  Glyph="&#xE04B;"
+                                  Foreground="{ThemeResource OnTertiaryContainerColor}"/>
+                        <TextBlock Text="Zoom"
+                                   Foreground="{ThemeResource OnTertiaryContainerColor}"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                </HyperlinkButton>
+
+                <TextBlock Grid.Column="1"
+                           Text="{Binding Classroom, TargetNullValue='Аудиторія не вказана'}"
+                           Foreground="DarkGray"
+                           Visibility="{Binding Model.IsOnline, Converter={StaticResource InverseBool}}"
+                           VerticalAlignment="Center" />
+
+                <Grid Grid.Column="2"
+                      VerticalAlignment="Center">
+                    <Frame Background="Blue"
+                           CornerRadius="8"
+                           Opacity="0.1"/>
+                    <TextBlock Foreground="Blue" 
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Padding="8,4">
+                        Пара <Run Text="{Binding Model.ParaNumber}"/>
+                    </TextBlock>
+                </Grid>
+            </Grid>
+        </StackPanel>
+    </Button>
+</UserControl>

@@ -1,0 +1,131 @@
+﻿<Page
+    x:Class="SELStudentApp.Presentation.CurriculumPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SELStudentApp.Presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:SELStudentApp.Presentation.Controls"
+    xmlns:viewModels="using:SELStudentApp.ViewModels" 
+    xmlns:models="using:SELStudentApp.Core.Models.Curriculum" 
+    xmlns:converters="using:SELStudentApp.Converters" 
+    xmlns:uen="using:Uno.Extensions.Navigation.UI"
+    xmlns:utu="using:Uno.Toolkit.UI"
+    xmlns:toolkit="using:Uno.UI.Toolkit"
+    xmlns:um="using:Uno.Material"
+    xmlns:system="using:System" 
+    mc:Ignorable="d"
+    Background="{ThemeResource BackgroundBrush}"
+    d:DataContext="{d:DesignInstance viewModels:CurriculumViewModel}"
+    DataContextChanged="Page_DataContextChanged">
+
+    <Grid utu:SafeArea.Insets="VisibleBounds">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <utu:NavigationBar Content="Навчальний план" />
+        <StackPanel Grid.Row="1">
+            <ProgressRing HorizontalAlignment="Center" Visibility="{Binding IsLoading}"/>
+            <controls:ErrorCard Message="{Binding ErrorMessage}"
+                    Visibility="{Binding ErrorMessage, Converter={StaticResource InvisibleWhenNull}}"/>
+        </StackPanel>
+        
+        <ScrollView Grid.Row="2"
+                    Margin="10,0"
+                    Visibility="{Binding Curriculum, Converter={StaticResource InvisibleWhenNull}}">
+            <StackPanel Spacing="20">
+                <Grid ColumnSpacing="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <controls:StatCard Title="Всього кредитів"
+                                       Value="{Binding Curriculum.TotalCredits}"/>
+                    <controls:StatCard Title="Всього годин"
+                                       Value="{Binding Curriculum.TotalHours}"
+                                       Grid.Column="1"/>
+                </Grid>
+                <ComboBox ItemsSource="{Binding Curriculum.Semesters}"
+                          SelectedItem="{Binding SelectedSemester, Mode=TwoWay}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate x:DataType="models:CurriculumSemester">
+                            <TextBlock Text="{x:Bind system:String.Format('{0} - ({1})', Name, Year)}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                
+                <ItemsControl ItemsSource="{Binding Subjects}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Spacing="15"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="viewModels:SubjectViewModel">
+                            <Button Style="{ThemeResource TextButtonStyle}"
+                                    HorizontalAlignment="Stretch"
+                                    HorizontalContentAlignment="Stretch"
+                                    Background="{ThemeResource PrimaryContainerColor}"
+                                    Foreground="{ThemeResource OnPrimaryContainerColor}"
+                                    Padding="15"
+                                    CornerRadius="12">
+                                <Button.Flyout>
+                                    <Flyout Placement="Full">
+                                        <Flyout.FlyoutPresenterStyle>
+                                            <Style BasedOn="{StaticResource BottomDrawerFlyoutPresenterStyle}" TargetType="FlyoutPresenter">
+                                                <Setter Property="CornerRadius" Value="28,28,0,0" />
+                                                <Setter Property="utu:DrawerFlyoutPresenter.DrawerLength" Value="0.85*"/>
+                                            </Style>
+                                        </Flyout.FlyoutPresenterStyle>
+                                        <controls:SubjectPerformanceControl toolkit:VisibleBoundsPadding.PaddingMask="All"/>
+                                    </Flyout>
+                                </Button.Flyout>
+                                <StackPanel Spacing="12">
+                                    <StackPanel Spacing="4">
+                                        <TextBlock Text="{x:Bind Model.Name}"
+                                                   Style="{ThemeResource TitleMedium}"/>
+                                        <TextBlock Text="{x:Bind Model.Department}"/>
+                                    </StackPanel>
+                                    <Grid Visibility="{x:Bind HasHoursOrCredits}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{x:Bind system:String.Format('{0} год.', Model.Hours)}"
+                                                       Visibility="{x:Bind HasHours}"/>
+                                            <TextBlock Text=" • " Visibility="{x:Bind HasHoursAndCredits}"/>
+                                            <TextBlock Text="{x:Bind system:String.Format('{0:F1} кред.', Model.Credits)}"
+                                                       Visibility="{x:Bind HasCredits}"/>
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="2"
+                                                    Orientation="Horizontal"
+                                                    Spacing="16"
+                                                    Visibility="{x:Bind Model.Performance, Converter={StaticResource InvisibleWhenNull}}">
+                                            <controls:PerformanceIndicator Label="Бал" Value="{x:Bind Model.Performance.Total.Current}"/>
+                                            <controls:PerformanceIndicator Label="ECTS" Value="{x:Bind Model.Performance.Total.Ects}"/>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Frame VerticalAlignment="Center"
+                                           HorizontalAlignment="Left"
+                                           Background="{ThemeResource TertiaryContainerColor}"
+                                           CornerRadius="8">
+                                        <TextBlock Foreground="{ThemeResource OnTertiaryContainerColor}"
+                                                   VerticalAlignment="Center"
+                                                   HorizontalAlignment="Center"
+                                                   Padding="8,4"
+                                                   Text="{x:Bind Model.Type}"/>
+                                    </Frame>
+                                </StackPanel>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </ScrollView>
+    </Grid>
+</Page>
