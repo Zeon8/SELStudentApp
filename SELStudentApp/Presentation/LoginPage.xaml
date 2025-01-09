@@ -36,9 +36,10 @@
             <controls:ErrorCard Message="{Binding ErrorMessage}"
                                 Visibility="{Binding ErrorMessage, Converter={StaticResource InvisibleWhenNull}}"/>
         </StackPanel>
-        <Frame Background="Black" Opacity="0.5" Visibility="{Binding IsLoading}">
+        <Border Background="Black" Opacity="0.5"
+                Visibility="{Binding IsLoading}">
             <ProgressRing HorizontalAlignment="Center"
                           VerticalAlignment="Center"/>
-        </Frame>
+        </Border>
     </Grid>
 </Page>

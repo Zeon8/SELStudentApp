@@ -26,22 +26,14 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
-        <Border Margin="10"
-                Height="4"
-				Width="32"
-				Background="{ThemeResource OnSurfaceVariantBrush}"
-				CornerRadius="2"
-				HorizontalAlignment="Center"
-                VerticalAlignment="Top"/>
-        
-        <Grid Grid.Row="1"
-              ColumnSpacing="5">
+
+        <Grid ColumnSpacing="5">
             <Button Style="{ThemeResource IconButtonStyle}"
-                    VerticalAlignment="Center">
+                    VerticalAlignment="Center"
+                    Click="Button_Click"
+                    Margin="10">
                 <FontIcon FontFamily="{StaticResource MaterialSymbols}" Glyph="&#xe5cd;"/>
             </Button>
             <TextBlock Text="Успішність"
@@ -49,7 +41,7 @@
                        HorizontalAlignment="Center"/>
         </Grid>
 
-        <ScrollView Grid.Row="2" Margin="20,5,20,0">
+        <ScrollViewer Grid.Row="1" Margin="20,5,20,5">
             <StackPanel Spacing="20">
                 <Border Style="{StaticResource Section}">
                     <StackPanel Spacing="12">
@@ -71,7 +63,7 @@
                                                    Value="{Binding SubjectType}"/>
                         </Grid>
 
-                        <Frame Padding="0,4"
+                        <Border Padding="0,4"
                                Visibility="{Binding HasHours}"
                                CornerRadius="10">       
                             <StackPanel Spacing="15">
@@ -87,7 +79,7 @@
                                                Text="{Binding Model.Hours}"/>
                                 </Grid>
                             </StackPanel>
-                        </Frame>
+                        </Border>
                     </StackPanel>
                 </Border>
                 <StackPanel Spacing="20"
@@ -119,6 +111,6 @@
                            HorizontalAlignment="Center"
                            Visibility="{Binding Model.Performance, Converter={StaticResource VisibleWhenNull}}"/>
             </StackPanel>
-        </ScrollView>
+        </ScrollViewer>
     </Grid>
 </UserControl>

@@ -70,7 +70,7 @@
 
                 <Grid Grid.Column="2"
                       VerticalAlignment="Center">
-                    <Frame Background="Blue"
+                    <Border Background="Blue"
                            CornerRadius="8"
                            Opacity="0.1"/>
                     <TextBlock Foreground="Blue" 

@@ -35,11 +35,12 @@
                               Glyph="&#xE851;"
                               Height="150"
                               FontSize="150"
-                              Visibility="Collapsed"/>
+                              Visibility="{Binding Student.PhotoUrl, Converter={StaticResource VisibleWhenNull}}"/>
                 </Grid>
 
-                <Frame Background="{ThemeResource PrimaryContainerColor}" Padding="20"
-                       CornerRadius="20">
+                <Border Background="{ThemeResource PrimaryContainerColor}"
+                        Padding="20"
+                        CornerRadius="20">
                     <StackPanel Spacing="20">
                         <controls:ProfilePageRow Title="Ім'я" Value="{Binding Student.Name}"/>
                         <controls:ProfilePageRow Title="Email" Value="{Binding Student.Email}"/>
@@ -49,7 +50,7 @@
                         <controls:ProfilePageRow Title="Останій візит" Value="{Binding Student.LastVisit}"
                                                  Visibility="{Binding Student.LastVisit, Converter={StaticResource InvisibleWhenNull}}"/>
                     </StackPanel>
-                </Frame>
+                </Border>
             </StackPanel>
         </Grid>
     </Grid>

@@ -9,16 +9,17 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <Frame CornerRadius="10"
+    <Grid CornerRadius="10"
            Background="{ThemeResource PrimaryContainerColor}"
-           Foreground="{ThemeResource OnPrimaryContainerColor}"
            Padding="10">
         <StackPanel Spacing="8">
             <TextBlock Text="{x:Bind Title}"
-                       Style="{ThemeResource LabelSmall}"/>
+                       Style="{ThemeResource LabelSmall}"
+                       Foreground="{ThemeResource OnPrimaryContainerColor}"/>
             <TextBlock Text="{x:Bind Value, Mode=OneWay}"
                        Style="{ThemeResource TitleMedium}"
-                       FontWeight="Bold"/>
+                       FontWeight="Bold"
+                       Foreground="{ThemeResource OnPrimaryContainerColor}"/>
         </StackPanel>
-    </Frame>
+    </Grid>
 </UserControl>

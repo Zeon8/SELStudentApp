@@ -18,7 +18,7 @@
     d:DataContext="{d:DesignInstance viewModels:ClassDetailViewModel}">
 
     <Page.Resources>
-        <Style x:Name="Card" TargetType="Frame">
+        <Style x:Name="Card" TargetType="Border">
             <Setter Property="CornerRadius" Value="10"/>
             <Setter Property="Background" Value="{ThemeResource PrimaryContainerColor}"/>
             <Setter Property="Padding" Value="15"/>
@@ -40,7 +40,7 @@
         <utu:NavigationBar Content="Інформація про пару"/>
         <ScrollView Grid.Row="1" Margin="20,0">
             <StackPanel Spacing="16">
-                <Frame Style="{StaticResource Card}">
+                <Border Style="{StaticResource Card}">
                     <StackPanel Spacing="16">
                         <TextBlock Text="{Binding Item.Model.Subject.Name}"
                                    Foreground="{ThemeResource OnPrimaryContainerColor}"
@@ -59,14 +59,15 @@
                                     Пара <Run Text="{Binding Item.Model.ParaNumber}"/>
                                 </TextBlock>
                             </StackPanel>
-                            <Frame Grid.Column="2"
-                                   Background="{Binding Item.Model.ClassType, Converter={StaticResource ClassTypeToColor}}"
-                                   CornerRadius="8"
-                                   Content="{Binding Item.ClassTypeName}"
-                                   Foreground="Black"
-                                   HorizontalContentAlignment="Center"
-                                   VerticalContentAlignment="Top"
-                                   Padding="10"/>
+                            <Border Grid.Column="2"
+                                    Background="{Binding Item.Model.ClassType, Converter={StaticResource ClassTypeToColor}}"
+                                    CornerRadius="8"
+                                    Padding="10">
+                                <TextBlock Text="{Binding Item.ClassTypeName}"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Top"
+                                           Foreground="Black"/>
+                            </Border>
                         </Grid>
                         <StackPanel Spacing="4">
                             <TextBlock Text="Викладач"/>
@@ -85,8 +86,8 @@
                             </StackPanel>
                         </StackPanel>
                     </StackPanel>
-                </Frame>
-                <Frame Style="{StaticResource Card}">
+                </Border>
+                <Border Style="{StaticResource Card}">
                     <StackPanel Spacing="12">
                         <TextBlock Text="Інформація про Zoom конференцію"
                                    Style="{StaticResource CardTitle}"/>
@@ -108,7 +109,7 @@
                         <TextBlock Text="Zoom конференція не створена"
                                    Visibility="{Binding Item.Model.IsOnline, Converter={StaticResource InverseBool}}"/>
                     </StackPanel>
-                </Frame>
+                </Border>
             </StackPanel>
         </ScrollView>
     </Grid>
