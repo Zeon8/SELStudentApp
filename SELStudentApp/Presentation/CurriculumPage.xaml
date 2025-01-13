@@ -120,7 +120,7 @@
                                                    VerticalAlignment="Center"
                                                    HorizontalAlignment="Center"
                                                    Padding="8,4"
-                                                   Text="{x:Bind Model.Type}"/>
+                                                   Text="{x:Bind SubjectType}"/>
                                     </Border>
                                 </StackPanel>
                             </Button>

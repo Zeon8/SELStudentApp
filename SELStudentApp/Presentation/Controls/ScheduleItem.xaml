@@ -17,6 +17,12 @@
     d:DesignWidth="400"
     d:DataContext="{d:DesignInstance viewModel:ScheduleItemViewModel}">
 
+    <UserControl.Resources>
+        <Style x:Name="Subtitle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#454545"/>
+        </Style>
+    </UserControl.Resources>
+
     <Button Padding="10"
             CornerRadius="12"
             Background="{Binding Model.ClassType, Mode=OneWay, Converter={StaticResource ClassTypeToColor}}"
@@ -24,7 +30,16 @@
             HorizontalContentAlignment="Stretch"
             Style="{ThemeResource TextButtonStyle}"
             uen:Navigation.Request="ClassDetail"
-            uen:Navigation.Data="{Binding}">
+            uen:Navigation.Data="{Binding}"
+            x:Name="Button">
+        
+        <Button.Resources>
+            <SolidColorBrush x:Name="TextButtonBackgroundPointerOver" Color="{x:Bind Button.Background, Mode=OneWay}"/>
+            <SolidColorBrush x:Name="TextButtonBackgroundPressed" Color="{x:Bind Button.Background, Mode=OneWay}"/>
+            <SolidColorBrush x:Name="TextButtonBackgroundFocused" Color="{x:Bind Button.Background, Mode=OneWay}"/>
+            <SolidColorBrush x:Name="TextButtonBackgroundPointerFocused" Color="{x:Bind Button.Background, Mode=OneWay}"/>
+        </Button.Resources>
+        
         <StackPanel Spacing="8">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -35,13 +50,13 @@
                            Style="{ThemeResource TitleMedium}"
                            Foreground="Black"/>
 
-                <TextBlock Grid.Column="2" Foreground="Gray">
+                <TextBlock Grid.Column="2" Style="{StaticResource Subtitle}">
                     <Run Text="{Binding StartTime}"/> - <Run Text="{Binding EndTime}"/>
                 </TextBlock>
             </Grid>
 
             <TextBlock Text="{Binding Teacher, FallbackValue='Викладач не вказаний'}"
-                       Foreground="Gray" />
+                       Style="{StaticResource Subtitle}" />
 
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -55,16 +70,16 @@
                     <StackPanel Orientation="Horizontal" Spacing="4">
                         <FontIcon FontFamily="{StaticResource MaterialSymbols}"
                                   Glyph="&#xE04B;"
-                                  Foreground="{ThemeResource OnTertiaryContainerColor}"/>
+                                  Foreground="Blue"/>
                         <TextBlock Text="Zoom"
-                                   Foreground="{ThemeResource OnTertiaryContainerColor}"
+                                   Foreground="Blue"
                                    VerticalAlignment="Center"/>
                     </StackPanel>
                 </HyperlinkButton>
 
                 <TextBlock Grid.Column="1"
                            Text="{Binding Classroom, TargetNullValue='Аудиторія не вказана'}"
-                           Foreground="DarkGray"
+                           Foreground="Gray"
                            Visibility="{Binding Model.IsOnline, Converter={StaticResource InverseBool}}"
                            VerticalAlignment="Center" />
 

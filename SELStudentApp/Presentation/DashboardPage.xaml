@@ -19,7 +19,8 @@
       >
 
     <Page.Resources>
-        <DataTemplate x:Key="ScheduleItem" x:DataType="viewModels:ScheduleItemViewModel">
+        <DataTemplate x:Key="ScheduleItem"
+                      x:DataType="viewModels:ScheduleItemViewModel">
             <controls:ScheduleItem />
         </DataTemplate>
     </Page.Resources>
@@ -39,7 +40,7 @@
         <ScrollViewer Grid.Row="1">
             <StackPanel HorizontalAlignment="Stretch"
                         VerticalAlignment="Center"
-                        Spacing="16" Margin="30,0">
+                        Spacing="16" Margin="30,15">
                 <Image Source="Assets/SELlogo.png" Height="100" HorizontalAlignment="Center"/>
                 <controls:DashboardButton
                     Header="Розклад на семестр"

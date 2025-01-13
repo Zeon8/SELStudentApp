@@ -65,7 +65,7 @@
                                     Padding="10">
                                 <TextBlock Text="{Binding Item.ClassTypeName}"
                                            HorizontalAlignment="Center"
-                                           VerticalAlignment="Top"
+                                           VerticalAlignment="Center"
                                            Foreground="Black"/>
                             </Border>
                         </Grid>

@@ -24,6 +24,8 @@ public partial class DataLoadingViewModel : ObservableObject
                 logger.Error("Got null data.");
                 ErrorMessage = "Виникла невідома помилка під час отримання даних.";
             }
+            else
+                ErrorMessage = null;
         }
         catch (TaskCanceledException exception)
         {

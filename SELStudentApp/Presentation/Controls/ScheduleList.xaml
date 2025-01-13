@@ -11,7 +11,7 @@
     d:DesignHeight="300"
     d:DesignWidth="400"
     d:DataContext="{d:DesignInstance viewModels:DataLoadingViewModel}">
-
+    
     <StackPanel Spacing="16">
         <StackPanel HorizontalAlignment="Center"
                 Visibility="{Binding IsLoading}">
