@@ -24,7 +24,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <utu:NavigationBar Content="Розклад на сьогодні" />
-        <ScrollView Grid.Row="1" Margin="10">
+        <ScrollViewer Grid.Row="1" Margin="10">
             <StackPanel Spacing="16">
                 <TextBlock Text="{x:Bind system:DateTime.Today.ToString('dd.MM.yyyy')}"
                            HorizontalAlignment="Center"/>
@@ -35,6 +35,6 @@
                     </controls:ScheduleList.MessageContent>
                 </controls:ScheduleList>
             </StackPanel>
-        </ScrollView>
+        </ScrollViewer>
     </Grid>
 </Page>

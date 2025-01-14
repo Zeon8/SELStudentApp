@@ -33,7 +33,7 @@
                     Visibility="{Binding ErrorMessage, Converter={StaticResource InvisibleWhenNull}}"/>
         </StackPanel>
         
-        <ScrollView Grid.Row="2"
+        <ScrollViewer Grid.Row="2"
                     Visibility="{Binding Curriculum, Converter={StaticResource InvisibleWhenNull}}">
             <StackPanel Spacing="20" Margin="10,0,10,20">
                 <Grid ColumnSpacing="5">
@@ -127,6 +127,6 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </StackPanel>
-        </ScrollView>
+        </ScrollViewer>
     </Grid>
 </Page>
