@@ -174,4 +174,13 @@
         <Generator>MSBuild:Compile</Generator>
       </Page>
     </ItemGroup>
+    <ItemGroup>
+      <Page Update="Presentation\Controls\ClassInfoBlock.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </Page>
+    </ItemGroup>
+    <ItemGroup>
+        <UnoIcon Include="Assets/Icons/icon.png" />
+        <UnoSplashScreen Include="Assets/Splash/splash_screen.png" />
+    </ItemGroup>
 </Project>
