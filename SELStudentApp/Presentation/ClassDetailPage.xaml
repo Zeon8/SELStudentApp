@@ -110,6 +110,34 @@
                                    Visibility="{Binding Item.Model.IsOnline, Converter={StaticResource InverseBool}}"/>
                     </StackPanel>
                 </Border>
+                <controls:ClassInfoBlock Title="Тема заняття"
+                                         Value="{Binding Item.Model.ThemeName}">
+                    <controls:ClassInfoBlock.Icon>
+                        <FontIcon FontFamily="{StaticResource MaterialSymbols}"
+                                  Glyph="&#xE865;"/>
+                    </controls:ClassInfoBlock.Icon>
+                </controls:ClassInfoBlock>
+                <controls:ClassInfoBlock Title="Навчальні матеріали"
+                         Value="{Binding Item.Model.AdditionalMaterials}">
+                    <controls:ClassInfoBlock.Icon>
+                        <FontIcon FontFamily="{StaticResource MaterialSymbols}"
+                                  Glyph="&#xF774;"/>
+                    </controls:ClassInfoBlock.Icon>
+                </controls:ClassInfoBlock>
+                <controls:ClassInfoBlock Title="Домашнє завдання"
+                                         Value="{Binding Item.Model.Homework}">
+                    <controls:ClassInfoBlock.Icon>
+                        <FontIcon FontFamily="{StaticResource MaterialSymbols}"
+                                  Glyph="&#xE88A;"/>
+                    </controls:ClassInfoBlock.Icon>
+                </controls:ClassInfoBlock>
+                <controls:ClassInfoBlock Title="Примітки"
+                         Value="{Binding Item.Model.Notes}">
+                    <controls:ClassInfoBlock.Icon>
+                        <FontIcon FontFamily="{StaticResource MaterialSymbols}"
+                                  Glyph="&#xE26C;"/>
+                    </controls:ClassInfoBlock.Icon>
+                </controls:ClassInfoBlock>
             </StackPanel>
         </ScrollView>
     </Grid>
