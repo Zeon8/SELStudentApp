@@ -10,12 +10,20 @@
     d:DesignWidth="400">
 
     <Grid Background="{ThemeResource ErrorContainerColor}"
-          Padding="15" CornerRadius="5">
-        <StackPanel Orientation="Horizontal" Spacing="10">
+          Padding="15"
+          CornerRadius="5"
+          ColumnSpacing="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+        
             <FontIcon FontFamily="{StaticResource MaterialSymbols}" Glyph="&#xE000;"
                       VerticalAlignment="Center"/>
-            <TextBlock Text="{x:Bind Message, Mode=OneWay}" Foreground="{ThemeResource ErrorColor}"
-                       VerticalAlignment="Center"/>
-        </StackPanel>
+
+            <TextBlock Text="{x:Bind Message, Mode=OneWay}"
+                       Foreground="{ThemeResource ErrorColor}"
+                       VerticalAlignment="Center"
+                       Grid.Column="1"/>
     </Grid>
 </UserControl>
