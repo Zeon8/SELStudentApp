@@ -40,7 +40,7 @@
         <ScrollViewer Grid.Row="1">
             <StackPanel HorizontalAlignment="Stretch"
                         VerticalAlignment="Center"
-                        Spacing="16" Margin="30,15">
+                        Spacing="16" Margin="30,16">
                 <Image Source="Assets/SELlogo.png" Height="100" HorizontalAlignment="Center"/>
                 <controls:DashboardButton
                     Header="Розклад на семестр"

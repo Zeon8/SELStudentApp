@@ -34,9 +34,8 @@
         </StackPanel>
         
         <ScrollView Grid.Row="2"
-                    Margin="10,0"
                     Visibility="{Binding Curriculum, Converter={StaticResource InvisibleWhenNull}}">
-            <StackPanel Spacing="20">
+            <StackPanel Spacing="20" Margin="10,0,10,20">
                 <Grid ColumnSpacing="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>

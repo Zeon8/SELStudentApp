@@ -38,8 +38,8 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <utu:NavigationBar Content="Інформація про пару"/>
-        <ScrollView Grid.Row="1" Margin="20,0">
-            <StackPanel Spacing="16">
+        <ScrollView Grid.Row="1">
+            <StackPanel Spacing="16" Margin="20,0,20,16">
                 <Border Style="{StaticResource Card}">
                     <StackPanel Spacing="16">
                         <TextBlock Text="{Binding Item.Model.Subject.Name}"
